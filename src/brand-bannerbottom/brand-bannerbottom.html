@@ -1,0 +1,59 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../store-shared-styles/store-foundation.html">
+<link rel="import" href="/src/brand-featurecardleft/brand-featurecardleft.html">
+<link rel="import" href="/src/brand-featurecardright/brand-featurecardright.html">
+
+
+<dom-module id="brand-bannerbottom">
+    <template>
+        <style include="store-foundation">
+            
+            .overlayImages{
+                position: absolute;
+                background:transparent;
+                width: 100%;
+                height:100%;
+            }
+            
+            
+            .img1{
+                margin:auto;
+               position: relative;
+               width:70%;
+               padding-top: 40px;
+               }
+               .grad{
+              background-image: linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(255,255,255,1) 64%,rgba(255,255,255,1) 100%);
+              position: absolute;
+              margin-top:-180px;
+              height:180px;
+              width:100%;                    
+            }     
+           
+        </style>
+
+       <div class="grad">
+        <div class="overlayImages">
+                <div class="img1">                          
+                 <brand-featurecardleft></brand-featurecardleft>
+                 <brand-featurecardright></brand-featurecardright>                   
+                </div>
+            </div>  
+       </div>
+                    
+       
+    </template>
+    <script>
+    Polymer({
+        is : "brand-bannerbottom",
+         ready: function () {
+                // this.$.requestText.generateRequest();
+            },
+
+            handleResponse: function (data) {
+                this.jsontext= data.detail.response;                         
+            }
+    }); 
+    </script>
+
+</dom-module>

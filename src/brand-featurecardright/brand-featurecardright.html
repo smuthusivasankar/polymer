@@ -1,0 +1,82 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel = "import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../store-shared-styles/store-foundation.html">
+
+<dom-module id="brand-featurecardright">
+    <template>
+        <style include="store-foundation">
+            
+            .overlayImages{
+                position: absolute;
+                background:transparent;
+                width: 100%;
+                height:100%;
+            }
+            .div-right{
+                float: right;
+                width: 49%; /* Not 50% because of 1px border. */
+                /*box-shadow:10px 10px 5px #888888;                */
+            }
+            
+            .img1{
+                margin:auto;
+               position: relative;
+               width:70%;
+               padding-top: 40px;
+            }
+            .para-text{
+                color: #000;
+                    width: 100%;
+                    margin: 24px 0 6px;
+                    text-align: center;
+                    font-size: 18px;
+                    font-family: 'adiBlack',Arial,Helvetica,Verdana,sans-serif;
+                    display: block;
+                    margin-bottom: 12px;
+                    /* font-weight: 800; */
+                    line-height: 16.2px;
+                    margin-top: 24px;
+                    text-decoration-style: solid;
+            }
+            .anc-text {              
+                color: #025f8e;
+                text-align: center;               
+                 font-size: 16px;                 
+                 font-family: 'adihausregular',Arial,Helvetica,Verdana,sans-serif;
+                 line-height: 2px;
+            }
+            a {
+                text-decoration: none;                
+            }
+        </style>
+        <app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
+             <div class="div-right">
+                          <a href="#"> <img src="{{bannerdata.image}}"></a>                         
+                    <p class="para-text">{{bannerdata.title}}<p>
+                    <p class="para-text anc-text"><a href="#" >{{bannerdata.linkTitle}}</a></p>                    
+                            
+                </div>
+        <iron-ajax
+            id="requestText"
+            url="http://10.67.90.232:83/api/fragment/getContent?contentId=425"
+            params="{{queryParams}}"
+            handle-as="json"
+            last-response = "{{bannerdata}}"            
+            on-response="handleResponse">
+        </iron-ajax>      
+       
+    </template>
+    <script>
+    Polymer({
+        is : "brand-featurecardright",
+         ready: function () {
+                this.$.requestText.generateRequest();
+            },
+
+            handleResponse: function (data) {
+                this.jsontext= data.detail.response;                         
+            }
+    }); 
+    </script>
+
+</dom-module>
